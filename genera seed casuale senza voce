@@ -1,0 +1,16 @@
+from bip39 import Mnemonic
+from bip32utils import BIP32Key
+
+# Genera un seed mnemonico
+mnemonic = Mnemonic("english")
+words = mnemonic.generate(strength=256)  # 256 bits = 24 parole
+print("Seed mnemonico: " + words)
+
+# Converte il seed mnemonico in un seed binario
+seed = Mnemonic.to_seed(words)
+
+# Genera la chiave privata
+key = BIP32Key.fromEntropy(seed)
+private_key = key.WalletImportFormat()
+
+print("Chiave privata: " + private_key)
